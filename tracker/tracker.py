@@ -128,20 +128,17 @@ class Tracker:
             ball_dict = tracks["ball"][frame_num]
             referee_dict = tracks["referee"][frame_num]
             goalkeeper_dict = tracks["goalkeeper"][frame_num]
+
             
             for track_id, player in player_dict.items():
-                frame = self.draw_elipse(frame, player["bbox"], (100, 175, 250), track_id)
-                # if player.get("has_ball", False):
-                #     frame = self.draw_triangle(frame, player["bbox"], (0, 0, 255))
+                colour = player.get("team_colours", (255, 0, 0))  # Default to blue if no colour is set
+                frame = self.draw_elipse(frame, player["bbox"], colour, track_id)
             
             for track_id, goalkeeper in goalkeeper_dict.items():
                 frame = self.draw_elipse(frame, goalkeeper["bbox"], (100, 175, 250), track_id)
 
             for track_id, referee in referee_dict.items():
                 frame = self.draw_elipse(frame, referee["bbox"], (0, 255, 255))
-
-            # for track_id, ball in ball_dict.items():
-            #     frame = self.draw_triangle(frame, ball["bbox"], (0, 255, 0))
 
             annotated_frames.append(frame)
 
